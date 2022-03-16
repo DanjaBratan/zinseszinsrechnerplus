@@ -6,7 +6,9 @@ public class Zzrechner {
     private double s; //monatliche Sparrate
     private int n; //Spardauer in Jahren
     private double p; //Jährlicher Zinssatz in %
-    private int a; //ausschüttungsintervall [monatlich = 1; quartal = 2; wöchentlich = 3; jährlich = 4]
+    private int a; //ausschüttungsintervall
+
+    private double endkapital;
 
 
     public long getK() {
@@ -48,8 +50,12 @@ public class Zzrechner {
         this.a = a;
     }
 
-
-
+    public double getEndkapital() {
+        return endkapital;
+    }
+    public void setEndkapital(double endkapital) {
+        this.endkapital = endkapital;
+    }
 
 
 }

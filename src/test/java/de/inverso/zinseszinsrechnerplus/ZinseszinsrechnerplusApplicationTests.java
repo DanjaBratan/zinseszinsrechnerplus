@@ -17,4 +17,6 @@ class ZinseszinsrechnerplusApplicationTests {
 		Assertions.assertNotNull(controller);
 	}
 
+	//prüft die verschiedenen berechnungen von Zinsen
+
 }

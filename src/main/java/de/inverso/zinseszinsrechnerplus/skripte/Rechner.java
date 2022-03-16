@@ -1,41 +1,41 @@
 package de.inverso.zinseszinsrechnerplus.skripte;
 
-import org.springframework.stereotype.Service;
-
-//@Service
 public class Rechner {
 
-    private char a = 'j';//ausschüttungsintervall [monatlich = m; quartal = q; wöchentlich = w; jährlich = j]
-    private double k = 5000; //anfangskapital
-    private double p = 10; //% jährlich
-    private int n = 50; //jahre
-    private double s = 100; //monatlich
+    private long k; //anfangskapital
+    private double s; //monatliche Sparrate
+    private int n; //Spardauer in Jahren
+    private double p; //Jährlicher Zinssatz in %
+    private int a; //ausschüttungsintervall [monatlich = 2; quartal = 3; wöchentlich = 1; jährlich = 4]
 
-    public Rechner(){
-        System.out.println("Anfangskapital: " + k);
-        System.out.println("Monatliche Sparrate: " + s);
-        System.out.println("Spardauer (Jahre): " + n);
-        System.out.println("Jährlicher Zinssatz: " + p + " %");
-        System.out.println("Ausschüttungsintervall: " + a);
+    public Rechner(long k, double s, int n,double p, int a){
+        this.k = k;
+        this.s = s;
+        this.n = n;
+        this.p = p;
+        this.a = a;
+    } //Konstruktor
 
+    public double berechnung(){
 
-    }
-
-    public void berechung(){
-
-        switch (a) {
-            case 'm': System.out.println("Kapital nach " + n + " Jahren: " + euro(rechner_m(k, p, n, s)) + " Euro");
-                break;
-            case 'q': System.out.println("Kapital nach " + n + " Jahren: " + euro(rechner_q(k, p, n, s)) + " Euro");
-                break;
-            case 'j': System.out.println("Kapital nach " + n + " Jahren: " + euro(rechner_j(k, p, n, s)) + " Euro");
-                break;
-            case 'w': System.out.println("wöchentliche Ausschüttung noch nicht implementier!");
-                break;
-            default: System.out.println("Fehler");
-                break;
+        if(a == 1){
+            System.out.println("wöchentliche Ausschüttung noch nicht implementiert!");
+            return 0;
+        }
+        else if(a == 2){
+            System.out.println("Monatliche Ausschütttung wird jetzt berechnet");
+            return euro(rechner_m(k, p, n, s));
+        }
+        else if(a == 3){
+            System.out.println("Quartals-Ausschütttung wird jetzt berechnet");
+            return euro(rechner_q(k, p, n, s));
+        }
+        else if(a == 4){
+            System.out.println("Jährliche Ausschütttung wird jetzt berechnet");
+            return euro(rechner_j(k, p, n, s));
         }
 
+        return 1;
     }
 
     public static double rechner_m(double k, double p, int n, double s) {
@@ -73,6 +73,7 @@ public class Rechner {
         return erg;
     }
 
+
     public static double euro(double a) { //double Zahl zu Euro
         double tmp = a * 100;
         int temp = (int) tmp;
@@ -80,11 +81,6 @@ public class Rechner {
         tmp /= 100;
         return tmp;
     }
-
-
-
-
-
 
 
 }
