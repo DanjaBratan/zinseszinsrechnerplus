@@ -23,15 +23,15 @@ public class Rechner {
             return 0;
         }
         else if(a == 2){
-            System.out.println("Monatliche Ausschütttung wird jetzt berechnet");
+            System.out.println("Monatliche Ausschüttung wird jetzt berechnet");
             return euro(rechner_m(k, p, n, s));
         }
         else if(a == 3){
-            System.out.println("Quartals-Ausschütttung wird jetzt berechnet");
+            System.out.println("Quartals-Ausschüttung wird jetzt berechnet");
             return euro(rechner_q(k, p, n, s));
         }
         else if(a == 4){
-            System.out.println("Jährliche Ausschütttung wird jetzt berechnet");
+            System.out.println("Jährliche Ausschüttung wird jetzt berechnet");
             return euro(rechner_j(k, p, n, s));
         }
 

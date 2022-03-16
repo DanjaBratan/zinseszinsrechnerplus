@@ -8,14 +8,11 @@
 <body>
 
     <h1>Berechnung des Zinseszinses</h1>
-
-    <svg width="400" height="20" style="display:block; margin:auto">
-        <rect width="400" height="10" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />
+    <svg width="450" height="20" style="display:block; margin:auto">
+        <rect width="450" height="10" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />
     </svg>
 
-
     <div class="Aussen">
-
 
         <div class="Eingabe">
 
@@ -46,42 +43,27 @@
                 </select>
 
                 <p></p><br>
-
                 <button class="berechnung"> <p>Berechnen</p> </button>
             </form>
         </div>
 
+        <svg width="550" height="20" style="display:block; margin:auto">
+            <rect width="550" height="10" style="fill:rgb(0,0,255);stroke-width:6;stroke:rgb(255,255,255)" />
+        </svg>
 
         <div class="Ausgabe">
-
-            <p th:text="'k: ' + ${zzrechner.k}" />
-            <p th:text="'s: ' + ${zzrechner.s}" />
-            <p th:text="'n: ' + ${zzrechner.n}" />
-            <p th:text="'p: ' + ${zzrechner.p}" />
-            <p th:text="'a: ' + ${zzrechner.a}" />
-
-            <p th:text="'Endkapital: ' + ${zzrechner.endkapital}" />
-            <!--a href="/zzrechner">was anderes angeben</a-->
-
+            <p th:text="'Wenn du über ' + ${zzrechner.n} + ' Jahre,
+                monatlich ' + ${zzrechner.s} + 'Euro zu ' + ${zzrechner.p} + '% investierst, kommst du am
+                Ende auf ein Endkapital von '
+                + ${zzrechner.endkapital} + 'Euro'"/>
         </div>
 
         <a href="/hello">halloseite</a>
-
         <br>
         <a href="/normal.html">normalseite</a>
         <br>
 
-
     </div>
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
