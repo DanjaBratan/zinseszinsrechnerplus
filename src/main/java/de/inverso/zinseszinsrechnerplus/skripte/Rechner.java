@@ -2,7 +2,7 @@ package de.inverso.zinseszinsrechnerplus.skripte;
 
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class Rechner {
 
     private char a = 'j';//ausschüttungsintervall [monatlich = m; quartal = q; wöchentlich = w; jährlich = j]

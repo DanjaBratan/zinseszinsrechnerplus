@@ -1,6 +1,6 @@
 package de.inverso.zinseszinsrechnerplus.controller;
 
-import de.inverso.zinseszinsrechnerplus.skripte.Greeting;
+import de.inverso.zinseszinsrechnerplus.skripte.Zzrechner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,16 +17,20 @@ public class NormalerController {
         return "berechne";
     }*/
 
-    @GetMapping("/greeting")
-    public String greetingForm(Model model) {
-        model.addAttribute("greeting", new Greeting());
-        return "greeting";
+
+    @GetMapping("/zzrechner")
+    public String zzrechnerForm(Model model) {
+        model.addAttribute("zzrechner", new Zzrechner());
+        return "zzrechner";
     }
 
-    @PostMapping("/greeting")
-    public String greetingSubmit(@ModelAttribute Greeting greeting, Model model) {
-        model.addAttribute("greeting", greeting);
-        return "result";
+    @PostMapping("/zzrechner")
+    public String zzrechnerSubmit(@ModelAttribute Zzrechner zzrechner, Model model) {
+        model.addAttribute("zzrechner", zzrechner);
+        return "zzrechnererg";
     }
+
+
+
 
 }

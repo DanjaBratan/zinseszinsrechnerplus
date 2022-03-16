@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Ergebnis</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/default.css}" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Berechnung des Zinseszinses</h1>
+
+    <svg width="400" height="20" style="display:block; margin:auto">
+        <rect width="400" height="10" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />
+    </svg>
+
+
+    <div class="Aussen">
+
+
+        <div class="Eingabe">
+
+            <form action="#" th:action="@{/zzrechner}" th:object="${zzrechner}" method="post">
+
+                <p>Anfangskapital in Euro</p>
+                <input type="text" th:field="*{k}" value="5000" style="width:100%" /> <!--variable k -->
+                <!-- wieso ist der Value leer? -->
+
+                <p>Monatliche Sparrate in Euro</p>
+                <input type="text" th:field="*{s}" value="100" style="width:100%" /> <!--variable s -->
+                <!-- wieso ist der Value leer? -->
+
+                <p>Spardauer in Jahren</p>
+                <input type="text" th:field="*{n}" value="10" style="width:100%"/> <!--variable n -->
+                <!-- wieso ist der Value leer? -->
+
+                <p>Jährlicher Zinssatz in Prozent</p>
+                <input type="text" th:field="*{p}" value="2" style="width:100%"/> <!--variable p -->
+                <!-- wieso ist der Value leer? -->
+
+                <p>Ausschüttungsintervall</p>
+                <select id="select1" th:field="*{a}" value="1"> <!--variable a -->
+                    <option value="1">Wöchentlich</option>
+                    <option value="2">Monatlich</option>
+                    <option value="3">Quartalsweise</option>
+                    <option value="4">Jährlich</option>
+                </select>
+
+                <p></p><br>
+
+                <button class="berechnung"> <p>Berechnen</p> </button>
+            </form>
+        </div>
+
+
+        <div class="Ausgabe">
+
+            <p th:text="'k: ' + ${zzrechner.k}" />
+            <p th:text="'s: ' + ${zzrechner.s}" />
+            <p th:text="'n: ' + ${zzrechner.n}" />
+            <p th:text="'p: ' + ${zzrechner.p}" />
+            <p th:text="'a: ' + ${zzrechner.a}" />
+
+            <a href="/zzrechner">was anderes angeben</a>
+
+        </div>
+
+        <a href="/hello">halloseite</a>
+
+        <br>
+        <a href="/normal.html">normalseite</a>
+        <br>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
