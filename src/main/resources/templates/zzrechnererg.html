@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Ergebnis</title>
+    <title>Berechnung des ZZ</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link th:href="@{/css/default.css}" rel="stylesheet" />
 </head>
@@ -19,36 +19,37 @@
             <form action="#" th:action="@{/zzrechner}" th:object="${zzrechner}" method="post">
 
                 <p>Anfangskapital in Euro</p>
-                <input type="text" th:field="*{k}" value="5000" style="width:100%" /> <!--variable k -->
-                <!-- wieso ist der Value leer? -->
+                <input type="text" style="width:100%" th:field="*{k}" /> <!--variable k -->
+                <p th:if="${#fields.hasErrors('k')}" th:errors="*{k}"></p>
 
                 <p>Monatliche Sparrate in Euro</p>
-                <input type="text" th:field="*{s}" value="100" style="width:100%" /> <!--variable s -->
-                <!-- wieso ist der Value leer? -->
+                <input type="text" th:field="*{s}" style="width:100%" /> <!--variable s -->
+                <p th:if="${#fields.hasErrors('s')}" th:errors="*{s}"></p>
 
                 <p>Spardauer in Jahren</p>
-                <input type="text" th:field="*{n}" value="10" style="width:100%"/> <!--variable n -->
-                <!-- wieso ist der Value leer? -->
+                <input type="text" th:field="*{n}" style="width:100%"/> <!--variable n -->
+                <p th:if="${#fields.hasErrors('n')}" th:errors="*{n}"></p>
 
                 <p>Jährlicher Zinssatz in Prozent</p>
-                <input type="text" th:field="*{p}" value="2" style="width:100%"/> <!--variable p -->
-                <!-- wieso ist der Value leer? -->
+                <input type="text" th:field="*{p}" style="width:100%"/> <!--variable p -->
+                <p th:if="${#fields.hasErrors('p')}" th:errors="*{p}"></p>
 
                 <p>Ausschüttungsintervall</p>
-                <select id="select1" th:field="*{a}" value="1"> <!--variable a -->
-                    <option value="1">Wöchentlich</option>
+                <select id="select1" th:field="*{a}" value="2"> <!--variable a -->
+                    <!--option value="1">Wöchentlich</option-->
                     <option value="2">Monatlich</option>
                     <option value="3">Quartalsweise</option>
                     <option value="4">Jährlich</option>
                 </select>
+                <p th:if="${#fields.hasErrors('a')}" th:errors="*{a}"></p>
 
                 <p></p><br>
                 <button class="berechnung"> <p>Berechnen</p> </button>
             </form>
         </div>
 
-        <svg width="550" height="20" style="display:block; margin:auto">
-            <rect width="550" height="10" style="fill:rgb(0,0,255);stroke-width:6;stroke:rgb(255,255,255)" />
+        <svg width="550" height="15" style="display:block; margin:auto">
+            <rect width="550" height="8" style="fill:rgb(255,255,255);stroke-width:6;stroke:rgb(255,255,255)" />
         </svg>
 
         <div class="Ausgabe">
@@ -56,12 +57,10 @@
                 monatlich ' + ${zzrechner.s} + 'Euro zu ' + ${zzrechner.p} + '% investierst, kommst du am
                 Ende auf ein Endkapital von '
                 + ${zzrechner.endkapital} + 'Euro'"/>
-        </div>
 
-        <a href="/hello">halloseite</a>
-        <br>
-        <a href="/normal.html">normalseite</a>
-        <br>
+            <p></p><br>
+
+        </div>
 
     </div>
 

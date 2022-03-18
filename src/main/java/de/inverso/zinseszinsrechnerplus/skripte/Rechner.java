@@ -2,11 +2,12 @@ package de.inverso.zinseszinsrechnerplus.skripte;
 
 public class Rechner {
 
-    private long k; //anfangskapital
-    private double s; //monatliche Sparrate
-    private int n; //Spardauer in Jahren
-    private double p; //Jährlicher Zinssatz in %
-    private int a; //ausschüttungsintervall [monatlich = 2; quartal = 3; wöchentlich = 1; jährlich = 4]
+    //Konstanten
+    private final long k; //anfangskapital
+    private final double s; //monatliche Sparrate
+    private final int n; //Spardauer in Jahren
+    private final double p; //Jährlicher Zinssatz in %
+    private final int a; //ausschüttungsintervall [monatlich = 2; quartal = 3; wöchentlich = 1; jährlich = 4]
 
     public Rechner(long k, double s, int n,double p, int a){
         this.k = k;
@@ -14,12 +15,14 @@ public class Rechner {
         this.n = n;
         this.p = p;
         this.a = a;
-    } //Konstruktor
+    } //Konstruktor zur Wertzuweisung
 
-    public double berechnung(){
 
+    public double berechnung(){ //Berechnungsmethode
+
+        //Intervallprüfung
         if(a == 1){
-            System.out.println("wöchentliche Ausschüttung noch nicht implementiert!");
+            System.out.println("wöchentliche Ausschüttung noch nicht vorhanden!");
             return 0;
         }
         else if(a == 2){
@@ -34,10 +37,12 @@ public class Rechner {
             System.out.println("Jährliche Ausschüttung wird jetzt berechnet");
             return euro(rechner_j(k, p, n, s));
         }
-
-        return 1;
+        else{
+            return 0;
+        }
     }
 
+    //Monatlicher Intervall
     public static double rechner_m(double k, double p, int n, double s) {
         p = (p/1200)+1;
         double erg = k * hoch(p, 12 * n);
@@ -47,6 +52,7 @@ public class Rechner {
         return erg;
     }
 
+    //Quartalsintervall
     public static double rechner_q(double k, double p, int n, double s) {
         p = (p/400)+1;
         double erg = k * hoch(p, 4 * n);
@@ -56,6 +62,7 @@ public class Rechner {
         return erg;
     }
 
+    //Jährlicher Intervall
     public static double rechner_j(double k, double p, int n, double s) {
         p = (p/100)+1;
         double erg = k * hoch(p, n);
@@ -65,6 +72,8 @@ public class Rechner {
         return erg;
     }
 
+
+    //Potenzfunktion
     public static double hoch(double a, int n) {
         double erg = 1;
         for (int i = 0; i < n; i++) {
@@ -74,10 +83,11 @@ public class Rechner {
     }
 
 
+    //Konvertierungsfunktion
     public static double euro(double a) { //double Zahl zu Euro
         double tmp = a * 100;
-        int temp = (int) tmp;
-        tmp = (double) temp;
+        //int temp = (int) tmp;
+        tmp = (int) tmp;
         tmp /= 100;
         return tmp;
     }

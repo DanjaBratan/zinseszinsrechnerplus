@@ -5,11 +5,9 @@
     <link th:href="@{/css/default.css}" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-
 <body>
 
     <h1>Berechnung des Zinseszinses</h1>
-
     <svg width="450" height="20" style="display:block; margin:auto">
         <rect width="450" height="10" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />
     </svg>
@@ -22,28 +20,29 @@
         <form action="#" th:action="@{/zzrechner}" th:object="${zzrechner}" method="post">
 
             <p>Anfangskapital in Euro</p>
-            <input type="text" th:field="*{k}" value="5000" style="width:100%" /> <!--variable k -->
-            <!-- wieso ist der Value leer? -->
+            <input type="text" style="width:100%" th:field="*{k}" /> <!--variable k -->
+            <p th:if="${#fields.hasErrors('k')}" th:errors="*{k}"></p>
 
             <p>Monatliche Sparrate in Euro</p>
-            <input type="text" th:field="*{s}" value="100" style="width:100%" /> <!--variable s -->
-            <!-- wieso ist der Value leer? -->
+            <input type="text" th:field="*{s}" style="width:100%" /> <!--variable s -->
+            <p th:if="${#fields.hasErrors('s')}" th:errors="*{s}"></p>
 
             <p>Spardauer in Jahren</p>
-            <input type="text" th:field="*{n}" value="10" style="width:100%"/> <!--variable n -->
-            <!-- wieso ist der Value leer? -->
+            <input type="text" th:field="*{n}" style="width:100%"/> <!--variable n -->
+            <p th:if="${#fields.hasErrors('n')}" th:errors="*{n}">/p>
 
             <p>Jährlicher Zinssatz in Prozent</p>
-            <input type="text" th:field="*{p}" value="2" style="width:100%"/> <!--variable p -->
-            <!-- wieso ist der Value leer? -->
+            <input type="text" th:field="*{p}" style="width:100%"/> <!--variable p -->
+            <p th:if="${#fields.hasErrors('p')}" th:errors="*{p}"></p>
 
             <p>Ausschüttungsintervall</p>
-            <select id="select1" th:field="*{a}" value="1"> <!--variable a -->
-                <option value="1">Wöchentlich</option>
+            <select id="select1" th:field="*{a}" value="2"> <!--variable a -->
+                <!--option value="1">Wöchentlich</option-->
                 <option value="2">Monatlich</option>
                 <option value="3">Quartalsweise</option>
                 <option value="4">Jährlich</option>
             </select>
+            <p th:if="${#fields.hasErrors('a')}" th:errors="*{a}"></p>
 
             <p></p><br>
 
@@ -57,26 +56,8 @@
 
     </div>
 
-    <a href="/hello">halloseite</a>
-
-    <br>
-    <a href="/normal.html">normalseite</a>
-    <br>
-
 
 </div>
 
-
-<!--br>
-<p> Der Wert der ausgewählten Option ist: <span class="output"> </span></p>
-<button onclick="getOption()"> Prüfe Wert </button>
-<br>
-<script type="text/javascript">
-        function getOption() {
-            selectElement = document.querySelector('#select1');
-            output = selectElement.value;
-            document.querySelector('.output').textContent = output;
-        }
-</script-->
 </body>
 </html>

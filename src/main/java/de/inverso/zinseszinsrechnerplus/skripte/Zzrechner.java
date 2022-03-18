@@ -1,13 +1,25 @@
 package de.inverso.zinseszinsrechnerplus.skripte;
 
+import javax.validation.constraints.NotNull;
+
 public class Zzrechner {
 
+    @NotNull
     private long k; //anfangskapital
+
+    @NotNull
     private double s; //monatliche Sparrate
+
+    @NotNull
     private int n; //Spardauer in Jahren
+
+    @NotNull
     private double p; //Jährlicher Zinssatz in %
+
+    @NotNull
     private int a; //ausschüttungsintervall
 
+    @NotNull
     private double endkapital;
 
 

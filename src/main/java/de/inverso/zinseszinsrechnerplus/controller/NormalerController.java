@@ -4,54 +4,51 @@ import de.inverso.zinseszinsrechnerplus.skripte.Rechner;
 import de.inverso.zinseszinsrechnerplus.skripte.Zzrechner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+
 
 @Controller
 public class NormalerController {
 
     @GetMapping("/zzrechner") //von /zzrechner
-    public String zzrechnerForm(Model model) {
-
+    public String zzrechnerForm(Model model)
+    {
         model.addAttribute("zzrechner", new Zzrechner());
-
         return "zzrechner";
     }
 
-
     @PostMapping("/zzrechner") //zum /zzrechner
-    public String zzrechnerSubmit(@ModelAttribute Zzrechner zzrechner, Model model) {
+    public String zzrechnerSubmit(@ModelAttribute @Valid Zzrechner zzrechner, Errors errors, Model model) {
 
-      /*  try{
-
-        }
-        catch(exception){
+        if(errors.hasErrors()){
+            Rechner berechnung1 = new Rechner(0, 0, 0, 0, 2); //Rechner Objekt erstellen
+            zzrechner.setEndkapital(berechnung1.berechnung());  //lasse das Endkapital berechnen und setze das Ergebnis in die Datenklasse
+            model.addAttribute("zzrechner", zzrechner); //alle Ergebnisse in die Datenklasse einfügen
             return "zzrechner";
+        }
 
-        }*/
+        try{
+            Rechner berechnung1 = new Rechner(zzrechner.getK(), zzrechner.getS(),
+                    zzrechner.getN(), zzrechner.getP(), zzrechner.getA()); //Rechner Objekt erstellen
 
-
-        //try and catch abprüfen !!!!
-        Rechner berechnung1 = new Rechner(zzrechner.getK(), zzrechner.getS(),
-                zzrechner.getN(), zzrechner.getP(), zzrechner.getA());
-
-        System.out.println("Kapital: " + zzrechner.getK() + " Sparrate" + zzrechner.getS() + " Jahre:" +
-                zzrechner.getN() + " Zinssatz" + zzrechner.getP() + " Intervall" + zzrechner.getA());
+            System.out.println("Kapital: " + zzrechner.getK() + " Sparrate" + zzrechner.getS() + " Jahre:" +
+                    zzrechner.getN() + " Zinssatz" + zzrechner.getP() + " Intervall" + zzrechner.getA()); //gebe aktuelle Angaben aus
 
 
-        zzrechner.setEndkapital(berechnung1.berechnung());
-        System.out.println("Endkapital beträgt:" + zzrechner.getEndkapital()); //gebe das Endkapital aus
+            zzrechner.setEndkapital(berechnung1.berechnung()); //lasse das Endkapital berechnen und setze das Ergebnis in die Datenklasse
+            System.out.println("Endkapital beträgt:" + zzrechner.getEndkapital()); //gebe das Endkapital aus
 
 
-        model.addAttribute("zzrechner", zzrechner);
-        return "zzrechnererg";
+            model.addAttribute("zzrechner", zzrechner); //alle Ergebnisse in die Datenklasse einfügen
+            return "zzrechnererg";
+
+        } catch(Exception e){
+            System.out.println("Fehler entstanden");
+            return "zzrechner";
+        }
+
     }
-
-
-    @ExceptionHandler
-    public void handleException(){
-        System.out.println("Fehler aufgetreten");
-    }
-
 
 }
