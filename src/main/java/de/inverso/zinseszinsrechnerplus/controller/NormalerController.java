@@ -12,6 +12,8 @@ import javax.validation.Valid;
 @Controller
 public class NormalerController {
 
+    // value = path = '' => "/zzrechner"
+    //@RequestMapping(value = "/zzrechner", method = RequestMethod.GET)
     @GetMapping("/zzrechner") //von /zzrechner
     public String zzrechnerForm(Model model)
     {
@@ -19,6 +21,8 @@ public class NormalerController {
         return "zzrechner";
     }
 
+
+    //@RequestMapping(value = "/zzrechner", method = RequestMethod.POST)
     @PostMapping("/zzrechner") //zum /zzrechner
     public String zzrechnerSubmit(@ModelAttribute @Valid Zzrechner zzrechner, Errors errors, Model model) {
 
