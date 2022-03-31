@@ -5,61 +5,61 @@ import javax.validation.constraints.NotNull;
 public class Zzrechner {
 
     @NotNull
-    private long k; //anfangskapital
+    private long kapital; //anfangskapital
 
     @NotNull
-    private double s; //monatliche Sparrate
+    private double sparrateMonatlich; //monatliche Sparrate
 
     @NotNull
-    private int n; //Spardauer in Jahren
+    private int spardauerJahre; //Spardauer in Jahren
 
     @NotNull
-    private double p; //Jährlicher Zinssatz in %
+    private double prozentZinsen; //Jährlicher Zinssatz in %
 
     @NotNull
-    private int a; //ausschüttungsintervall
+    private int ausschuttungsintervall; //ausschüttungsintervall
 
     @NotNull
     private double endkapital;
 
 
-    public long getK() {
-        return k;
+    public long getKapital() {
+        return kapital;
     }
-    public void setK(long k) {
-        this.k = k;
-    }
-
-
-    public double getS() {
-        return s;
-    }
-    public void setS(double s) {
-        this.s = s;
+    public void setKapital(long kapital) {
+        this.kapital = kapital;
     }
 
 
-    public int getN() {
-        return n;
+    public double getSparrateMonatlich() {
+        return sparrateMonatlich;
     }
-    public void setN(int n) {
-        this.n = n;
-    }
-
-
-    public double getP() {
-        return p;
-    }
-    public void setP(double p) {
-        this.p = p;
+    public void setSparrateMonatlich(double sparrateMonatlich) {
+        this.sparrateMonatlich = sparrateMonatlich;
     }
 
 
-    public int getA() {
-        return a;
+    public int getSpardauerJahre() {
+        return spardauerJahre;
     }
-    public void setA(int a) {
-        this.a = a;
+    public void setSpardauerJahre(int spardauerJahre) {
+        this.spardauerJahre = spardauerJahre;
+    }
+
+
+    public double getProzentZinsen() {
+        return prozentZinsen;
+    }
+    public void setProzentZinsen(double prozentZinsen) {
+        this.prozentZinsen = prozentZinsen;
+    }
+
+
+    public int getAusschuttungsintervall() {
+        return ausschuttungsintervall;
+    }
+    public void setAusschuttungsintervall(int ausschuttungsintervall) {
+        this.ausschuttungsintervall = ausschuttungsintervall;
     }
 
     public double getEndkapital() {

@@ -20,29 +20,28 @@
         <form action="#" th:action="@{/zzrechner}" th:object="${zzrechner}" method="post">
 
             <p>Anfangskapital in Euro</p>
-            <input type="text" style="width:100%" th:field="*{k}" /> <!--variable k -->
-            <p th:if="${#fields.hasErrors('k')}" th:errors="*{k}"></p>
+            <input type="text" style="width:100%" th:field="*{kapital}" /> <!--variable kapital -->
+            <p th:if="${#fields.hasErrors('kapital')}" th:errors="*{kapital}"></p>
 
             <p>Monatliche Sparrate in Euro</p>
-            <input type="text" th:field="*{s}" style="width:100%" /> <!--variable s -->
-            <p th:if="${#fields.hasErrors('s')}" th:errors="*{s}"></p>
+            <input type="text" th:field="*{sparrateMonatlich}" style="width:100%" /> <!--variable sparrateMonatlich -->
+            <p th:if="${#fields.hasErrors('sparrateMonatlich')}" th:errors="*{sparrateMonatlich}"></p>
 
             <p>Spardauer in Jahren</p>
-            <input type="text" th:field="*{n}" style="width:100%"/> <!--variable n -->
-            <p th:if="${#fields.hasErrors('n')}" th:errors="*{n}">/p>
+            <input type="text" th:field="*{spardauerJahre}" style="width:100%"/> <!--variable spardauerJahre -->
+            <p th:if="${#fields.hasErrors('spardauerJahre')}" th:errors="*{spardauerJahre}">/p>
 
             <p>Jährlicher Zinssatz in Prozent</p>
-            <input type="text" th:field="*{p}" style="width:100%"/> <!--variable p -->
-            <p th:if="${#fields.hasErrors('p')}" th:errors="*{p}"></p>
+            <input type="text" th:field="*{prozentZinsen}" style="width:100%"/> <!--variable prozentZinsen -->
+            <p th:if="${#fields.hasErrors('prozentZinsen')}" th:errors="*{prozentZinsen}"></p>
 
             <p>Ausschüttungsintervall</p>
-            <select id="select1" th:field="*{a}" value="2"> <!--variable a -->
-                <!--option value="1">Wöchentlich</option-->
-                <option value="2">Monatlich</option>
-                <option value="3">Quartalsweise</option>
-                <option value="4">Jährlich</option>
+            <select id="select1" th:field="*{ausschuttungsintervall}" value="2"> <!--variable ausschuttungsintervall -->
+                <option value="1">Monatlich</option>
+                <option value="2">Quartalsweise</option>
+                <option value="3">Jährlich</option>
             </select>
-            <p th:if="${#fields.hasErrors('a')}" th:errors="*{a}"></p>
+            <p th:if="${#fields.hasErrors('ausschuttungsintervall')}" th:errors="*{ausschuttungsintervall}"></p>
 
             <p></p><br>
 

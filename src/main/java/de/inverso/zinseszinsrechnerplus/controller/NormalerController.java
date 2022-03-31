@@ -13,7 +13,7 @@ import javax.validation.Valid;
 public class NormalerController {
 
     // value = path = '' => "/zzrechner"
-    //@RequestMapping(value = "/zzrechner", method = RequestMethod.GET)
+    //dasselbe wie: @RequestMapping(value = "/zzrechner", method = RequestMethod.GET)
     @GetMapping("/zzrechner") //von /zzrechner
     public String zzrechnerForm(Model model)
     {
@@ -22,26 +22,26 @@ public class NormalerController {
     }
 
 
-    //@RequestMapping(value = "/zzrechner", method = RequestMethod.POST)
+    //dasselbe wie: @RequestMapping(value = "/zzrechner", method = RequestMethod.POST)
     @PostMapping("/zzrechner") //zum /zzrechner
     public String zzrechnerSubmit(@ModelAttribute @Valid Zzrechner zzrechner, Errors errors, Model model) {
 
         if(errors.hasErrors()){
-            Rechner berechnung1 = new Rechner(0, 0, 0, 0, 2); //Rechner Objekt erstellen
-            zzrechner.setEndkapital(berechnung1.berechnung());  //lasse das Endkapital berechnen und setze das Ergebnis in die Datenklasse
+            //Rechner rechnerfehler = new Rechner(0, 0, 0, 0, 2); //Rechner Objekt erstellen
+            zzrechner.setEndkapital(0); //Endkapital 0
             model.addAttribute("zzrechner", zzrechner); //alle Ergebnisse in die Datenklasse einfügen
             return "zzrechner";
         }
 
         try{
-            Rechner berechnung1 = new Rechner(zzrechner.getK(), zzrechner.getS(),
-                    zzrechner.getN(), zzrechner.getP(), zzrechner.getA()); //Rechner Objekt erstellen
+            Rechner rechnerobjekt = new Rechner(zzrechner.getKapital(), zzrechner.getSparrateMonatlich(),
+                    zzrechner.getSpardauerJahre(), zzrechner.getProzentZinsen(), zzrechner.getAusschuttungsintervall()); //Rechner Objekt erstellen
 
-            System.out.println("Kapital: " + zzrechner.getK() + " Sparrate" + zzrechner.getS() + " Jahre:" +
-                    zzrechner.getN() + " Zinssatz" + zzrechner.getP() + " Intervall" + zzrechner.getA()); //gebe aktuelle Angaben aus
+            System.out.println("Kapital: " + zzrechner.getKapital() + " Sparrate" + zzrechner.getSparrateMonatlich() + " Jahre:" +
+                    zzrechner.getSpardauerJahre() + " Zinssatz" + zzrechner.getProzentZinsen() + " Intervall" + zzrechner.getAusschuttungsintervall()); //gebe aktuelle Angaben aus
 
 
-            zzrechner.setEndkapital(berechnung1.berechnung()); //lasse das Endkapital berechnen und setze das Ergebnis in die Datenklasse
+            zzrechner.setEndkapital(rechnerobjekt.berechnung()); //lasse das Endkapital berechnen und setze das Ergebnis in die Datenklasse
             System.out.println("Endkapital beträgt:" + zzrechner.getEndkapital()); //gebe das Endkapital aus
 
 
@@ -50,6 +50,7 @@ public class NormalerController {
 
         } catch(Exception e){
             System.out.println("Fehler entstanden");
+            System.out.println(e);
             return "zzrechner";
         }
 

@@ -1,92 +1,116 @@
 package de.inverso.zinseszinsrechnerplus.skripte;
 
-public class Rechner {
 
-    //Konstanten
-    private final long k; //anfangskapital
-    private final double s; //monatliche Sparrate
-    private final int n; //Spardauer in Jahren
-    private final double p; //Jährlicher Zinssatz in %
-    private final int a; //ausschüttungsintervall [monatlich = 2; quartal = 3; wöchentlich = 1; jährlich = 4]
+import de.inverso.zinseszinsrechnerplus.interfaces.rechnerInterface;
 
-    public Rechner(long k, double s, int n,double p, int a){
-        this.k = k;
-        this.s = s;
-        this.n = n;
-        this.p = p;
-        this.a = a;
+import static java.lang.Math.pow;
+
+public class Rechner implements rechnerInterface {
+
+    //Konstanten (die eigentlich final sind, weil immer wieder neues Objekt erzeugt wird)
+    private long kapital; //anfangskapital in Euro
+    private double sparrateMonatlich; //monatliche Sparrate in Euro
+    private int spardauerJahre; //Spardauer in Jahren
+    private double prozentZinsen; //Jährlicher Zinssatz in %
+    private int ausschuttungsintervall; //ausschüttungsintervall [monatlich = 1; quartal = 2; jährlich = 3]
+
+
+    public Rechner(long kapital, double sparrateMonatlich, int spardauerJahre, double prozentZinsen, int ausschuttungsintervall) {
+        this.kapital = kapital;
+        this.sparrateMonatlich = sparrateMonatlich;
+        this.spardauerJahre = spardauerJahre;
+        this.prozentZinsen = prozentZinsen;
+        this.ausschuttungsintervall = ausschuttungsintervall;
     } //Konstruktor zur Wertzuweisung
 
 
-    public double berechnung(){ //Berechnungsmethode
-
+    @Override
+    public double berechnung() { //Berechnungsmethode
         //Intervallprüfung
-        if(a == 1){
-            System.out.println("wöchentliche Ausschüttung noch nicht vorhanden!");
-            return 0;
-        }
-        else if(a == 2){
-            System.out.println("Monatliche Ausschüttung wird jetzt berechnet");
-            return euro(rechner_m(k, p, n, s));
-        }
-        else if(a == 3){
-            System.out.println("Quartals-Ausschüttung wird jetzt berechnet");
-            return euro(rechner_q(k, p, n, s));
-        }
-        else if(a == 4){
-            System.out.println("Jährliche Ausschüttung wird jetzt berechnet");
-            return euro(rechner_j(k, p, n, s));
-        }
-        else{
+        if (ausschuttungsintervall == 1) {
+            System.out.println("Monatliche Ausschüttung wird berechnet");
+            return doubleZuEuro(rechnerMonatlich(kapital, prozentZinsen, spardauerJahre, sparrateMonatlich));
+        } else if (ausschuttungsintervall == 2) {
+            System.out.println("Quartals-Ausschüttung wird berechnet");
+            return doubleZuEuro(rechnerQuartalsweise(kapital, prozentZinsen, spardauerJahre, sparrateMonatlich));
+        } else if (ausschuttungsintervall == 3) {
+            System.out.println("Jährliche Ausschüttung wird berechnet");
+            return doubleZuEuro(rechnerJahr(kapital, prozentZinsen, spardauerJahre, sparrateMonatlich));
+        } else {
             return 0;
         }
     }
 
-    //Monatlicher Intervall
-    public static double rechner_m(double k, double p, int n, double s) {
-        p = (p/1200)+1;
-        double erg = k * hoch(p, 12 * n);
-        for (int i = 0; i <= 12*n-1; i++) {
-            erg += hoch(p, i) * s;
+    //Monatlicher Intervall ####//berechungMonatsintervall
+    public static double rechnerMonatlich(double kapital, double prozentZinsen, int spardauerJahre, double sparrateMonatlich) {
+        try {
+
+            prozentZinsen = (prozentZinsen / 1200) + 1;
+            double erg = kapital * pow(prozentZinsen, 12 * spardauerJahre);
+            for (int i = 0; i <= 12 * spardauerJahre - 1; i++) {
+                erg += pow(prozentZinsen, i) * sparrateMonatlich;
+            }
+            return erg;
+
+        } catch (NumberFormatException e) {
+            System.out.println("Falsches Zahlenformat!");
+            System.out.println(e);
+            return 0;
+        }catch(ArithmeticException e1){
+            System.out.println("Fehler bei Berechnung");
+            System.out.println(e1);
+            return 0;
         }
-        return erg;
     }
 
     //Quartalsintervall
-    public static double rechner_q(double k, double p, int n, double s) {
-        p = (p/400)+1;
-        double erg = k * hoch(p, 4 * n);
-        for (int i = 0; i <= 4*n-1; i++) {
-            erg += hoch(p, i) * s * 3;
+    public static double rechnerQuartalsweise(double kapital, double prozentZinsen, int spardauerJahre, double sparrateMonatlich) {
+        try {
+
+            prozentZinsen = (prozentZinsen / 400) + 1;
+            double erg = kapital * pow(prozentZinsen, 4 * spardauerJahre);
+            for (int i = 0; i <= 4 * spardauerJahre - 1; i++) {
+                erg += pow(prozentZinsen, i) * sparrateMonatlich * 3;
+            }
+            return erg;
+
+        } catch (NumberFormatException e) {
+            System.out.println("Falsches Zahlenformat!");
+            System.out.println(e);
+            return 0;
+        }catch(ArithmeticException e1){
+            System.out.println("Fehler bei Berechnung");
+            System.out.println(e1);
+            return 0;
         }
-        return erg;
     }
 
     //Jährlicher Intervall
-    public static double rechner_j(double k, double p, int n, double s) {
-        p = (p/100)+1;
-        double erg = k * hoch(p, n);
-        for (int i = 0; i <= n-1; i++) {
-            erg += hoch(p, i) * s * 12;
+    public static double rechnerJahr(double kapital, double prozentZinsen, int spardauerJahre, double sparrateMonatlich) {
+        try {
+
+            prozentZinsen = (prozentZinsen / 100) + 1;
+            double erg = kapital * pow(prozentZinsen, spardauerJahre);
+            for (int i = 0; i <= spardauerJahre - 1; i++) {
+                erg += pow(prozentZinsen, i) * sparrateMonatlich * 12;
+            }
+            return erg;
+
+        } catch (NumberFormatException e) {
+            System.out.println("Falsches Zahlenformat!");
+            System.out.println(e);
+            return 0;
+        }catch(ArithmeticException e1){
+            System.out.println("Fehler bei Berechnung");
+            System.out.println(e1);
+            return 0;
         }
-        return erg;
     }
 
 
-    //Potenzfunktion
-    public static double hoch(double a, int n) {
-        double erg = 1;
-        for (int i = 0; i < n; i++) {
-            erg *= a;
-        }
-        return erg;
-    }
-
-
-    //Konvertierungsfunktion
-    public static double euro(double a) { //double Zahl zu Euro
+    //Konvertierungsfunktion /////////#####bessere begriff
+    public static double doubleZuEuro(double a) { //double Zahl zu Euro
         double tmp = a * 100;
-        //int temp = (int) tmp;
         tmp = (int) tmp;
         tmp /= 100;
         return tmp;

@@ -18,36 +18,36 @@ public class ZzrechnerTest {
     @Test
     @DisplayName("set und get von variable k")
     void setandgetK(){
-        zzrechner.setK(5000); //setze k auf 5000
-        assertEquals(5000, zzrechner.getK());//assert
+        zzrechner.setKapital(5000); //setze k auf 5000
+        assertEquals(5000, zzrechner.getKapital());//assert
     }
 
     @Test
     @DisplayName("set und get von variable s")
     void setandgetS(){
-        zzrechner.setS(200); //setze s auf 200
-        assertEquals(200, zzrechner.getS());//assert
+        zzrechner.setSparrateMonatlich(200); //setze s auf 200
+        assertEquals(200, zzrechner.getSparrateMonatlich());//assert
     }
 
     @Test
     @DisplayName("set und get von variable n")
     void setandgetN(){
-        zzrechner.setN(10); //setze n auf 10
-        assertEquals(10, zzrechner.getN());//assert
+        zzrechner.setSpardauerJahre(10); //setze n auf 10
+        assertEquals(10, zzrechner.getSpardauerJahre());//assert
     }
 
     @Test
     @DisplayName("set und get von variable p")
     void setandgetP(){
-        zzrechner.setP(5); //setze p auf 5
-        assertEquals(5, zzrechner.getP());//assert
+        zzrechner.setProzentZinsen(5); //setze p auf 5
+        assertEquals(5, zzrechner.getProzentZinsen());//assert
     }
 
     @Test
     @DisplayName("set und get von variable a")
     void setandgetA(){
-        zzrechner.setA(3); //setze a auf 3
-        assertEquals(3, zzrechner.getA());//assert
+        zzrechner.setAusschuttungsintervall(3); //setze a auf 3
+        assertEquals(3, zzrechner.getAusschuttungsintervall());//assert
     }
 
     @Test
